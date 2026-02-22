@@ -9,7 +9,6 @@
         body {
             margin: 0;
             padding: 0;
-            /* Apple's native font stack for premium iOS feel */
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
@@ -22,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* Ensure the canvas sits behind the content but in front of background */
         #confetti-canvas {
             position: fixed; 
             top: 0; 
@@ -34,14 +32,19 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for readability over confetti */
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            width: 85%;
+            
+            /* The Magic Tweaks for Perfect Spacing */
+            width: 100%; 
+            margin: 24px; /* Guarantees 24px of space from the screen edge at all times */
+            box-sizing: border-box; /* Stops padding from stretching the box */
+            
             position: relative;
-            z-index: 2; /* Ensures content sits above confetti */
+            z-index: 2; 
         }
 
         /* Page 1: Animation and CTA */
@@ -82,7 +85,7 @@
 
         .cta-btn:active {
             transform: scale(0.95);
-            animation: none; /* Stops pulse on tap for better feedback */
+            animation: none; 
         }
 
         /* Page 2: The Invitation */
@@ -145,8 +148,7 @@
         /* --- MOBILE SPECIFIC TWEAKS --- */
         @media (max-width: 480px) {
             .container {
-                padding: 30px 20px;
-                width: 90%;
+                padding: 30px; /* Kept generous to stop text touching the inside box edges */
             }
             .birthday-text {
                 font-size: 2em;
@@ -191,30 +193,26 @@
 
     <script>
         function revealInvitation() {
-            // 1. Fire the confetti!
-            // We aim it from the bottom center (origin y: 0.7) upwards
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.7 },
-                colors: ['#ff6b81', '#a6c1ee', '#fbc2eb'], // Match the theme colors
-                disableForReducedMotion: true // Be kind to users with motion sensitivity settings
+                colors: ['#ff6b81', '#a6c1ee', '#fbc2eb'], 
+                disableForReducedMotion: true 
             });
 
             const page1 = document.getElementById('page1');
             const page2 = document.getElementById('page2');
 
-            // 2. Wait a fraction of a second so the confetti bursts before fading out
             setTimeout(() => {
                 page1.classList.add('fade-out');
 
-                // 3. Complete the transition
                 setTimeout(() => {
                     page1.style.display = 'none';
                     page2.classList.add('fade-in');
-                }, 400); // Matches CSS transition time
+                }, 400); 
 
-            }, 300); // Short delay for confetti impact
+            }, 300); 
         }
     </script>
 
