@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday!</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            /* Apple's native font stack for premium iOS feel */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Ensure the canvas sits behind the content but in front of background */
+        #confetti-canvas {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 1; 
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for readability over confetti */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 85%;
+            position: relative;
+            z-index: 2; /* Ensures content sits above confetti */
+        }
+
+        /* Page 1: Animation and CTA */
+        #page1 {
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .birthday-text {
+            font-size: 2.5em;
+            color: #ff6b81;
+            margin-bottom: 5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .name-text {
+            font-size: 3em;
+            font-weight: 800;
+            color: #2f3542;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-btn {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+            animation: pulse 2s infinite;
+            transition: transform 0.1s;
+            touch-action: manipulation; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        .cta-btn:active {
+            transform: scale(0.95);
+            animation: none; /* Stops pulse on tap for better feedback */
+        }
+
+        /* Page 2: The Invitation */
+        #page2 {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+        }
+
+        .invitation-header {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ff6b81;
+            margin-bottom: 20px;
+        }
+
+        .invitation-body {
+            font-size: 1.1em;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .invitation-body ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .invitation-body li {
+            margin-bottom: 8px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 129, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 107, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 129, 0); }
+        }
+
+        /* Utility classes */
+        .fade-out {
+            opacity: 0 !important;
+            transform: scale(1.05) !important;
+            pointer-events: none;
+        }
+
+        .fade-in {
+            display: block !important;
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        /* --- MOBILE SPECIFIC TWEAKS --- */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                width: 90%;
+            }
+            .birthday-text {
+                font-size: 2em;
+            }
+            .name-text {
+                font-size: 2.2em; 
+            }
+            .cta-btn {
+                width: 100%; 
+                padding: 16px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="page1">
+            <div class="birthday-text">Happy Birthday</div>
+            <div class="name-text">&lt;Insert Name&gt;!</div>
+            <button class="cta-btn" onclick="revealInvitation()">Tap Here For Your Surprise</button>
+        </div>
+
+        <div id="page2">
+            <div class="invitation-header">You are invited...</div>
+            <div class="invitation-body">
+                <p>...to spend a magical birthday with Scott! 💖</p>
+                <p>We'll kick things off with breakfast around <strong>9:00 AM</strong>. Please arrive at the spot at your earliest convenience.</p>
+                <p>To ensure you're ready for all the surprises I have planned today, please bring:</p>
+                <ul>
+                    <li>Comfortable, closed-toe shoes (like trainers)</li>
+                    <li>A smart-casual outfit with layers</li>
+                    <li>Something loose, cozy, and easy to slip into</li>
+                    <li>A small overnight bag for your essentials</li>
+                </ul>
+                <p style="text-align: center; font-weight: bold; color: #ff6b81; margin-top: 20px;">Get ready for a great day!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        function revealInvitation() {
+            // 1. Fire the confetti!
+            // We aim it from the bottom center (origin y: 0.7) upwards
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.7 },
+                colors: ['#ff6b81', '#a6c1ee', '#fbc2eb'], // Match the theme colors
+                disableForReducedMotion: true // Be kind to users with motion sensitivity settings
+            });
+
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+
+            // 2. Wait a fraction of a second so the confetti bursts before fading out
+            setTimeout(() => {
+                page1.classList.add('fade-out');
+
+                // 3. Complete the transition
+                setTimeout(() => {
+                    page1.style.display = 'none';
+                    page2.classList.add('fade-in');
+                }, 400); // Matches CSS transition time
+
+            }, 300); // Short delay for confetti impact
+        }
+    </script>
+
+</body>
+</html>
