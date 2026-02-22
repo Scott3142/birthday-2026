@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday!</title>
+    <title>Happy Birthday Jordon!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         /* Base Styles */
         body {
@@ -38,10 +40,10 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             max-width: 500px;
             
-            /* The Magic Tweaks for Perfect Spacing */
+            /* Spacing */
             width: 100%; 
-            margin: 24px; /* Guarantees 24px of space from the screen edge at all times */
-            box-sizing: border-box; /* Stops padding from stretching the box */
+            margin: 24px; 
+            box-sizing: border-box; 
             
             position: relative;
             z-index: 2; 
@@ -53,18 +55,22 @@
         }
 
         .birthday-text {
-            font-size: 2.5em;
-            color: #ff6b81;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #8395a7; /* A soft, elegant grayish-blue */
             margin-bottom: 5px;
-            animation: float 3s ease-in-out infinite;
         }
 
         .name-text {
-            font-size: 3em;
-            font-weight: 800;
-            color: #2f3542;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5em; /* Big and beautiful */
+            color: #ff6b81; /* Matches the button and confetti */
             margin-bottom: 30px;
-            letter-spacing: -0.5px;
+            line-height: 1.2;
+            animation: float 3s ease-in-out infinite; /* Moved the floating animation to the name */
+            text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.15); /* Soft, premium glow */
         }
 
         .cta-btn {
@@ -148,13 +154,14 @@
         /* --- MOBILE SPECIFIC TWEAKS --- */
         @media (max-width: 480px) {
             .container {
-                padding: 30px; /* Kept generous to stop text touching the inside box edges */
+                padding: 30px; 
             }
             .birthday-text {
-                font-size: 2em;
+                font-size: 0.9em;
+                letter-spacing: 3px;
             }
             .name-text {
-                font-size: 2.2em; 
+                font-size: 3.8em; 
             }
             .cta-btn {
                 width: 100%; 
@@ -168,23 +175,24 @@
     <div class="container">
         <div id="page1">
             <div class="birthday-text">Happy Birthday</div>
-            <div class="name-text">&lt;Insert Name&gt;!</div>
-            <button class="cta-btn" onclick="revealInvitation()">Tap Here For Your Surprise</button>
+            <div class="name-text">Jordon</div>
+            <button class="cta-btn" onclick="revealInvitation()">Tap here sexy ❤️</button>
         </div>
 
         <div id="page2">
             <div class="invitation-header">You are invited...</div>
             <div class="invitation-body">
-                <p>...to spend a magical birthday with Scott! 💖</p>
-                <p>We'll kick things off with breakfast around <strong>9:00 AM</strong>. Please arrive at the spot at your earliest convenience.</p>
-                <p>To ensure you're ready for all the surprises I have planned today, please bring:</p>
+                <p>Our first outing will be for breakfast around <strong>9am</strong>. Please arrive at <b>the spot</b> at your earliest convenience.</p>
+                <p>To make sure you're ready for everything, please bring:</p>
                 <ul>
-                    <li>Comfortable, closed-toe shoes (like trainers)</li>
-                    <li>A smart-casual outfit with layers</li>
-                    <li>Something loose, cozy, and easy to slip into</li>
-                    <li>A small overnight bag for your essentials</li>
+                    <li>Yourself</li>
+                    <li>An outift for a casual activity (nothing strenuous, don't worry - just standard 'day clothes' with trainers!)</li>
+                    <li>An evening outfit (nothing overly fancy, just something for a standard evening activity!)</li>
+                    <li>Makeup, hairbrush etc. if you think you might need it before the above evening activity.</li>
                 </ul>
-                <p style="text-align: center; font-weight: bold; color: #ff6b81; margin-top: 20px;">Get ready for a great day!</p>
+                <p>All transport, food, drinks and snacks will be provided.</p>
+                <p>If you have any questions, please get in touch, although you are not allowed to ask about what we're doing!</p>
+                <p style="text-align: center; font-weight: bold; color: #ff6b81; margin-top: 20px;">I love you to the moon and back ❤️</p>
             </div>
         </div>
     </div>
